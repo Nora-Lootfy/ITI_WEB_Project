@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}register/login{% endblock %}
+
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'accounts/styles/form_styles.css' %}">
+{% endblock %}
+
+{% block main %} 
+<main>
+    <div class="login-box">
+        <div class="login-action">
+            <h2 class="login"><a href="{% url 'login' %}">LOGIN</a></h2>
+            <h2 class="register" active><a href="{% url 'register' %}">REGISTER</a></h2>
+        </div>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="login form" >
+            </div>
+            <div class="register form" active-form>
+                {% include 'forms.html' %}
+            </div>
+            <button type="submit">
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit
+            </button>
+        </form>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'accounts/scripts/form_scripts.js'%}"></script>
+{% endblock %}

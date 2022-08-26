@@ -1,0 +1,22 @@
+{% load widget_tweaks %}
+
+{% for field in form %}
+<div class="user-box">
+    {% if form.is_bound %}
+        {% if field.errors %}
+            {{ field }}
+            {% for error in field.errors %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% else %}
+            {{ field }}
+        {% endif %}
+    {% else %}
+        {{ field }}
+    {% endif %}
+    
+    {{ field.label_tag }}
+</div>
+{% endfor %}

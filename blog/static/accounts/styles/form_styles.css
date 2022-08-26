@@ -1,0 +1,204 @@
+main {
+    height: 80vh;
+} 
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 40px;
+    background: var(--box-color);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+@media (max-width: 395px) {
+    .login-box  {
+        width: 385px;
+    }
+}
+
+@media (max-width: 380px) {
+    .login-box  {
+        width: 355px;
+    }
+}
+
+@media (max-width: 290px) {
+    .login-box  {
+        width: 275px;
+    }
+    .login-box .login-action h2 {
+        font-size: 20px;
+    }
+}
+
+.login-box .login-action {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.login-box .login-action h2 {
+    margin: 0 0 30px;
+    text-align: center;
+    border-bottom: 1px solid transparent;
+}
+
+.login-box .login-action h2 a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.login-box .login-action [active] {
+    border-bottom-color: var(--main-color);
+}
+
+.login-box .login-action h2:hover {
+    border-bottom-color: var(--main-color);
+    cursor: pointer;
+}
+
+.login-box form > div:not([active-form]) {
+    display: none;
+}
+
+.login-box .user-box {
+    position: relative;
+}
+
+.login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 1px solid var(--text-color);
+    margin-bottom: 30px;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+.login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--text-color);
+    pointer-events: none;
+    transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input[value] ~ label,
+.login-box .user-box input:valid ~ label{
+    top: -20px;
+    left: 0;
+    color: var(--main-color);
+    font-size: 12px;
+}
+
+.login-box form button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--main-color);
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+}
+
+.login-box button:hover {
+    background: var(--main-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--main-color), 0 0 25px var(--main-color),;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.login-box button span {
+    position: absolute;
+    display: block;
+}
+
+.login-box button span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--main-color));
+    animation: btn-anim1 1s linear infinite;
+    -webkit-animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+    50%,100% {
+        left: 100%;
+    }
+}
+
+.login-box button span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--main-color));
+    animation: btn-anim2 1s linear infinite 0.25s;
+    -webkit-animation: btn-anim2 1s linear infinite 0.25s;
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+    50%,100% {
+        top: 100%;
+    }
+}
+
+.login-box button span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(-90deg, transparent, var(--main-color));
+    animation: btn-anim3 1s linear infinite 0.5s;
+    -webkit-animation: btn-anim3 1s linear infinite 0.5s;
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+    50%,100% {
+        right: 100%;
+    }
+}
+
+.error-message {
+    color: rgb(233, 75, 75);
+    font-size: 16px;
+}

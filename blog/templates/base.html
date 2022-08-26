@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    {% block styles %} {% endblock %}
+</head>
+<body>
+    <header>
+        <div class="content">
+            <h2>LOGO</h2>
+            <p>continue to blog</p>
+        </div>
+    </header>
+    <nav>
+        <span class="dark active" data-color="dark"></span>
+        <span class="light" data-color="light"></span>
+        {% block linkes %} {% endblock %}
+    </nav>
+    {% block main %} {% endblock %}
+    <footer>
+        <div class="container">
+            <div class="content">
+                <div>
+                    <h3>Made by:</h3>
+                    <span>Ahmed Elsellamy</span>
+                    <span>Ahmed Alaa</span>
+                    <span>Nourhan Abdelaziz</span>
+                </div>
+                <div>
+                {% block foot %}{% endblock %}
+                </div>
+                <div>
+                    <h3>LOGO</h3>
+                    <p>&copy;2022</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'scripts/main.js'%}"></script>
+    {% block script %} {% endblock %}
+</body>
+</html>
