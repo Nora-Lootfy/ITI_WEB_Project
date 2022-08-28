@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts.apps.AccountsConfig",
     "main.apps.MainConfig",
+    "categories.apps.CategoriesConfig",
     "widget_tweaks",
     'fontawesomefree',
 ]
