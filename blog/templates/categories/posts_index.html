@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'global/base.html' %}
 {% block main %}
     <h1>Posts</h1>
     <ul>
     {% for post in object_list %}
-       <li><a href="{% url 'post-details' post.pk %}">{{ post.post_title }}</a>
+        <li><a href="{% url 'post-details' post.pk %}">{{ post.post_title }}</a>
         {{ post.post_user_id}} - <a href="{% url 'edit-post' post.pk %}">Edit this post</a> <br><br>
-       </li>
+        </li>
     {% endfor %}
     </ul>
 {% endblock %}

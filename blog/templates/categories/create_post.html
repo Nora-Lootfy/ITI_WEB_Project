@@ -1,22 +1,39 @@
-{% extends 'base.html' %}
+{% extends 'global/base.html' %}
 {% load static %}
+
 {% block title %}Create New Post{% endblock %}
-{% block main %}
-<div>
-    <h1>Create New Post</h1>
 
-<!--enc to send data from html client to server-->
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="mb-3">
-          {% include 'forms.html' %}
-      </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
-
-
-    {% block script %}
-    {% endblock %}
-
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'accounts/styles/form_styles.css' %}">
 {% endblock %}
+
+{% block continuetoblog %} 
+<p>continue to blog</p>
+{% endblock %}
+
+{% block main %} 
+<main>
+    <h1>Create New Post</h1>
+    <div class="login-box">
+        <form method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="login form" active-form >
+                {% include 'global/forms.html' %}
+            </div>
+            <div class="register form" >
+            </div>
+            <button type="submit">
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit
+            </button>
+        </form>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'accounts/scripts/form_scripts.js'%}"></script>
+{% endblock %}
+
