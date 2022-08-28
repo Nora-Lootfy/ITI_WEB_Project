@@ -125,7 +125,7 @@ main {
     letter-spacing: 4px
 }
 
-.login-box button:hover {
+.login-box button:hover{
     background: var(--main-color);
     color: var(--text-color);
     border-radius: 5px;
@@ -136,7 +136,7 @@ main {
     -o-border-radius: 5px;
 }
 
-.login-box button span {
+.login-box button span  {
     position: absolute;
     display: block;
 }
