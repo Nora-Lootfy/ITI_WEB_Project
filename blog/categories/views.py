@@ -12,22 +12,22 @@ from .forms import PostForm
 
 class PostList(ListView):
     model = Post
-    template_name = 'posts/posts_index.html'
+    template_name = 'categories/posts_index.html'
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'posts/post_details.html'
+    template_name = 'categories/post_details.html'
 
 class PostCreate(CreateView):
     form_class = PostForm
-    template_name = 'posts/create_post.html'
-    success_url = 'posts/posts_index.html'
+    template_name = 'categories/create_post.html'
+    success_url = 'categories/posts_index.html'
 
 
 class PostUpdate(UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'posts/update_post.html'
+    template_name = 'categories/update_post.html'
     def get_success_url(self):
         post_id = self.object.id
         return reverse_lazy('post-details', kwargs={'pk': post_id})
