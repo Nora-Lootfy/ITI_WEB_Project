@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create New Post{% endblock %}
+{% block main %}
+<div>
+    <h1>Create New Post</h1>
+
+<!--enc to send data from html client to server-->
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+          {% include 'forms.html' %}
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+    {% block script %}
+    {% endblock %}
+
+{% endblock %}

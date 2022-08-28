@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Edit Post{% endblock %}
+{% block main %}
+    <h1>Edit Post</h1>
+<main>
+    <div class="login-box">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="login form" active-form >
+                {% include 'forms.html' %}
+            </div>
+            <div class="register form" >
+            </div>
+            <button type="submit">
+                <span></span>
+                <span></span>
+                <span></span>
+                Update
+            </button>
+        </form>
+    </div>
+</main>
+
+    {% block script %}
+    {% endblock %}
+
+{% endblock %}
