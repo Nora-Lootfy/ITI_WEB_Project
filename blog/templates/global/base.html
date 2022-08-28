@@ -6,15 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles/normalize.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <link rel="stylesheet" href="{% static 'global/styles/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'global/styles/main.css' %}">
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     {% block styles %} {% endblock %}
 </head>
 <body>
     <header>
         <div class="content">
-            <h2>LOGO</h2>
-            <p>continue to blog</p>
+            <h2><i class="fa-solid fa-blog"></i></h2>
+            {% block continuetoblog %} {% endblock %}
         </div>
     </header>
     <nav>
@@ -36,13 +37,13 @@
                 {% block foot %}{% endblock %}
                 </div>
                 <div>
-                    <h3>LOGO</h3>
-                    <p>&copy;2022</p>
+                    <h3><i class="fa-solid fa-blog"></i></h3>
+                    <p>&copy;2022<i class="fa-solid fa-bolt"></i></p>
                 </div>
             </div>
         </div>
     </footer>
-    <script src="{% static 'scripts/main.js'%}"></script>
+    <script src="{% static 'global/scripts/main.js'%}"></script>
     {% block script %} {% endblock %}
 </body>
 </html>

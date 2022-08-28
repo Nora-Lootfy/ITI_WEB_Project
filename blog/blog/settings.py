@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "accounts.apps.AccountsConfig",
+    "main.apps.MainConfig",
     "widget_tweaks",
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGOUT_REDIRECT_URL = "home"
 LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "login"

@@ -1,10 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'global/base.html' %}
 {% load static %}
 
 {% block title %}register/login{% endblock %}
 
 {% block styles %} 
 <link rel="stylesheet" href="{% static 'accounts/styles/form_styles.css' %}">
+{% endblock %}
+
+{% block continuetoblog %} 
+<p>continue to blog</p>
 {% endblock %}
 
 {% block main %} 
@@ -17,7 +21,7 @@
         <form method="post" novalidate>
             {% csrf_token %}
             <div class="login form" active-form >
-                {% include 'forms.html' %}
+                {% include 'global/forms.html' %}
             </div>
             <div class="register form" >
             </div>

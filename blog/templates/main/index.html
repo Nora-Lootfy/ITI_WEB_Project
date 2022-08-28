@@ -1,0 +1,158 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}home page{% endblock %}
+
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'accounts/styles/user_menu.css' %}">
+<link rel="stylesheet" href="{% static 'main/styles/landing.css' %}">
+{% endblock %}
+
+{% block linkes %} 
+
+{% if user.is_authenticated %}
+    <div class="links">
+        <div class="icons">
+            {{user.username}}
+        </div>
+        <ul>
+            <li><a href="#profile">Profile</a></li>
+            <li><a href="#changepassword">ِChange password</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        </ul>
+    </div>
+{% else %} 
+    <div class="links">
+        <a href="{% url 'login' %}">LOGIN</a>
+        <a href="{% url 'register' %}">REGISTER</a>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% block main %}
+<main>
+    <aside>
+        <div class="content-side">
+            <div class="icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="categories">
+                <div>
+                    <i class="fa-solid fa-baseball"></i>
+                    <p>Sports</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-heart"></i>
+                    <p>Health</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-newspaper"></i>
+                    <p>News</p>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <section class="main">
+        <h3>Top posts</h3>
+        <div class="body-main">
+            <div class="box">
+                <span style="--i:1"><img src="p1.jpg" /></span>
+                <span style="--i:2"><img src="p2.jpg" /></span>
+                <span style="--i:3"><img src="p3.jpg" /></span>
+                <span style="--i:4"><img src="p4.jpg" /></span>
+                <span style="--i:5"><img src="p5.jpg" /></span>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'main/scripts/landing.js' %}"></script>
+{% endblock %}
