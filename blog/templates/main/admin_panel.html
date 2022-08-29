@@ -1,0 +1,121 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}admin panel{% endblock %}
+
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'main/styles/admin_styles.css' %}">
+{% endblock %}
+
+{% block continuetoblog %} 
+<p>continue to blog</p>
+{% endblock %}
+
+{% block linkes %} 
+
+{% endblock %}
+
+{% block main %}
+<main>
+	<div class="container">
+        <div class="card-list">
+            <div class="icon left"><span></span></div>
+            <div class="icon right"><span></span></div>
+            <div class="info-wrapper">
+                <div class="info current">
+                    <h2 class="text name">Users</h2>
+                    <h4 class="text location">user</h4>
+                    <p class="text description">see all the users in the system</p>
+                </div>
+    
+                <div class="info">
+                    <h2 class="text name">Posts</h2>
+                    <h4 class="text location">post</h4>
+                    <p class="text description">See all the posts</p>
+                </div>
+    
+                <div class="info">
+                    <h2 class="text name">Cagtegories</h2>
+                    <h4 class="text location">category</h4>
+                    <p class="text description">see all categories in the system</p>
+                </div>
+                
+                <div class="info">
+                    <h2 class="text name">Forbidden words</h2>
+                    <h4 class="text location">forbidden words</h4>
+                    <p class="text description">see all the forbidden words</p>
+                </div>
+            </div>
+        </div>
+	</div>
+</main>
+<section class="users current">
+    <div class="container">
+    {% for usr in users %}
+        <div class="card-display {% if usr == user %}current-user{% endif %}">
+            <h2>{{usr.username}}</h2>
+            <p>{{usr.email}}</p>
+            {% if not usr.is_staff %}
+                <button>lock</button>
+                <button>unlock</button>
+                <button>make admin</button>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+</section>
+<section class="posts">
+    <div class="container">
+        {% for post in posts %}
+            <div class="card-display">
+                <img src="{{post.get_image_url}}">
+                <h2>{{post.post_title}}</h2>
+                <p>{{post.post_content}}</p>
+                {% if post.post_user_id == user %}
+                <button><a href="">edit</a></button>
+                <button><a href="">delete</a></button>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container btn">
+        <button><a href="{% url 'create-post' %}">Create new post</a></button>
+    </div>
+</section>
+<section class="categories">
+    <div class="container">
+        {% for category in categories %}
+            <div class="card-display">
+                <h2>{{category.category_name}}</h2>
+                <p>{{category.category_description}}</p>
+                {% if category.category_user == user %}
+                <button><a href="">edit</a></button>
+                <button><a href="">delete</a></button>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container btn">
+        <button><a href="">Create new Category</a></button>
+    </div>
+</section>
+<section class="forbidden-words">
+    <div class="container">
+        {% for category in categories %}
+            <div class="card-display">
+                <h2>{{category.category_name}}</h2>
+                <p>{{category.category_description}}</p>
+                <button><a href="">edit</a></button>
+                <button><a href="">delete</a></button>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container btn">
+        <button><a href="">Add new forbidden word</a></button>
+    </div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'main/scripts/admin_script.js' %}"></script>
+{% endblock %}

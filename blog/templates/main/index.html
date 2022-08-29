@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="{% static 'main/styles/landing.css' %}">
 {% endblock %}
 
+
+
 {% block linkes %} 
 
 {% if user.is_authenticated %}
@@ -17,6 +19,9 @@
         </div>
         <ul>
             <li><a href="#profile">Profile</a></li>
+            {% if user.is_staff  %}
+            <li><a href="{% url 'admin_panel' user.id %}">Manage blog</a></li>
+            {% endif %}
             <li><a href="{%url 'change_password'%}">ِChange password</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
