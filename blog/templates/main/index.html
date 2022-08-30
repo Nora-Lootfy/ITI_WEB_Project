@@ -139,7 +139,16 @@
         </div>
     </aside>
     <section class="main">
-        <h3>Top posts</h3>
+        {% if user.is_authenticated %}
+        <h1>Posts</h1>
+            <ul>
+                {% for post in posts %}
+                <li><a href="{% url 'post-details' post.pk %}">{{ post.post_title }}</a>
+                {{ post.post_user_id}} - <a href="{% url 'edit-post' post.pk %}">Edit this post</a> <br><br>
+                </li>
+                {% endfor %}
+            </ul>
+        {%endif%}
         <div class="body-main">
             <div class="box">
                 <span style="--i:1"><img src="p1.jpg" /></span>
