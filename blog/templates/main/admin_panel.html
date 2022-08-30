@@ -70,9 +70,8 @@
             <div class="card-display">
                 <img src="{{post.get_image_url}}">
                 <h2>{{post.post_title}}</h2>
-                <p>{{post.post_content}}</p>
                 {% if post.post_user_id == user %}
-                <button><a href="">edit</a></button>
+                <button><a href="{{post.get_post_url}}">edit</a></button>
                 <button><a href="">delete</a></button>
                 {% endif %}
             </div>
@@ -101,10 +100,9 @@
 </section>
 <section class="forbidden-words">
     <div class="container">
-        {% for category in categories %}
+        {% for word in forbidden_words %}
             <div class="card-display">
-                <h2>{{category.category_name}}</h2>
-                <p>{{category.category_description}}</p>
+                <h2>{{word.forbidden_word}}</h2>
                 <button><a href="">edit</a></button>
                 <button><a href="">delete</a></button>
             </div>

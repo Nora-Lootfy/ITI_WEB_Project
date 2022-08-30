@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
+from django.shortcuts import reverse
 # Create your models here.
 
 
@@ -28,10 +30,10 @@ class Tag(models.Model):
 
 class Post(models.Model):
     post_title = models.CharField(max_length=20, null=False, verbose_name='title')
-    post_image = models.ImageField(upload_to='posts/images', null=True, verbose_name='image')
+    post_image = models.ImageField(upload_to='categories/post/images/', null=True, verbose_name='image')
     post_content = models.TextField(null=True)
     post_category_id = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, verbose_name='category')
-    post_tags = models.ManyToManyField(Tag, null=True, blank=True, verbose_name='tags')
+    tags = TaggableManager()
     post_user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='user')
     post_created_at = models.DateTimeField(auto_now_add=True, null=True)
     post_updated_at = models.DateTimeField(auto_now=True, null=True)
@@ -44,7 +46,10 @@ class Post(models.Model):
         return Post.objects.all()
     
     def get_image_url(self):
-        return f"media/{self.post_image}"
+        return f"/media/{self.post_image}"
+    
+    def get_post_url(self):
+        return reverse("edit-post", args=[self.id])
 
 
 class Comment(models.Model):

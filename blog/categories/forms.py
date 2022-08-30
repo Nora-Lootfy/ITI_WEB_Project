@@ -4,7 +4,7 @@ from .models import Post, Category
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('post_title', 'post_content','post_image', 'post_category_id',)
+        fields = ('post_title', 'post_content','post_image', 'tags' ,'post_category_id', )
 
 
 class CategoryForm(forms.ModelForm):

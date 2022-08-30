@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "categories.apps.CategoriesConfig",
     "widget_tweaks",
     'fontawesomefree',
+    "taggit",
 ]
 
 MIDDLEWARE = [
