@@ -56,3 +56,9 @@ class PostDelete(DeleteView):
     model = Post
     template_name = 'categories/posts/delete_post.html'
     success_url = reverse_lazy('posts-index')
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.post_user_id != self.request.user:
+            raise Http404("You are not allowed to delete this Post")
+        return super(PostDelete, self).dispatch(request, *args, **kwargs)

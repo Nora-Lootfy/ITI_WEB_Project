@@ -1,8 +1,27 @@
 {% extends 'global/base.html' %}
 
 {% block main %}
-    <h1>{{ post.post_title }}</h1>
-    <p>{{ post.post_content }}</p>
-    <small>BY: {{ post.post_user_id }}</small><br>
-    <a href="{% url 'posts-index' %}">Back</a>
+    <div class="container">
+        <h1>{{ post.post_title }}</h1>
+        <p>BY: {{ post.post_user_id }} - {{ post.post_created_at }}</p>
+        <br><hr>
+        <br><br>
+        <img src="{{ post.get_image_url }}" alt="..."
+             width="200" height="200"><br><br>
+        <p>{{ post.post_content }}</p>
+        <a href="{% url 'posts-index' %}">Back</a>
+        <br><br>
+        <h2>Comments...</h2>
+        <br>
+        {% if not post.comments.all %}
+        No Comments Yet.. <a href="#">Add comment</a>
+        {% else %}
+        {% for comment in post.comments.all %}
+        <small><strong> {{ comment.comment_user_id }} - {{ comment.comment_time }} </strong></small><br>
+        {{ comment.comment_content }}
+        <br><br>
+        <hr>
+        {% endfor %}
+        {% endif %}
+    </div>
 {% endblock %}

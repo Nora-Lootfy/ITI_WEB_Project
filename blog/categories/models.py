@@ -54,9 +54,12 @@ class Post(models.Model):
 
 class Comment(models.Model):
     comment_content = models.TextField(max_length=200)
-    comment_post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
+    comment_post_id = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     comment_user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['comment_time']
 
     def __str__(self):
         return '{} commented on {}.'. format(self.comment_user_id, self.comment_post_id.post_title)
