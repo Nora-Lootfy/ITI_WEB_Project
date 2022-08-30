@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 # from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from .models import Post, Category
-from .forms import PostForm, CategoryForm
+from .models import Post, Category, Comment
+from .forms import PostForm, CategoryForm, CommentForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.http import Http404, HttpResponseRedirect
@@ -36,6 +36,24 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'categories/posts/post_details.html'
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        comments_connected = Comment.objects.filter(
+            comment_post_id=self.get_object()).order_by('-comment_time')
+        data['comments'] = comments_connected
+        if self.request.user.is_authenticated:
+            data['comment_form'] = CommentForm(instance=self.request.user)
+
+        return data
+
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(comment_content=request.POST.get('comment_content'),
+                              comment_user_id=self.request.user,
+                              comment_post_id=self.get_object())
+        new_comment.save()
+        return self.get(self, request, *args, **kwargs)
+
 
 @method_decorator(staff_member_required, name='dispatch')
 class PostCreate(CreateView):
@@ -66,6 +84,7 @@ class PostUpdate(UpdateView):
             raise Http404("You are not allowed to edit this Post")
         return super(PostUpdate, self).dispatch(request, *args, **kwargs)
 
+
 class PostDelete(DeleteView):
     model = Post
     template_name = 'categories/posts/delete_post.html'
@@ -76,3 +95,6 @@ class PostDelete(DeleteView):
         if obj.post_user_id != self.request.user:
             raise Http404("You are not allowed to delete this Post")
         return super(PostDelete, self).dispatch(request, *args, **kwargs)
+
+# class CommentCreate(CreateView)
+#     pass

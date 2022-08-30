@@ -13,7 +13,7 @@ class CategoryForm(forms.ModelForm):
         fields = ('category_name', 'category_description')
 
 
-class CommentForm(forms.Form):
+class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment_content',)

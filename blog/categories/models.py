@@ -66,6 +66,10 @@ class Post(models.Model):
     def total_dis_likes(self):
         return self.dislikes.count()
 
+    @property
+    def number_of_comments(self):
+        return Comment.objects.filter(comment_post_id=self).count()
+
 
 class Comment(models.Model):
     comment_content = models.TextField(max_length=200)

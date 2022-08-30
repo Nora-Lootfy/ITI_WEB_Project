@@ -13,15 +13,38 @@
         <br><br>
         <h2>Comments...</h2>
         <br>
-        {% if not post.comments.all %}
-        No Comments Yet.. <a href="#">Add comment</a>
-        {% else %}
-        {% for comment in post.comments.all %}
-        <small><strong> {{ comment.comment_user_id }} - {{ comment.comment_time }} </strong></small><br>
-        {{ comment.comment_content }}
-        <br><br>
-        <hr>
-        {% endfor %}
-        {% endif %}
+        {% if user.is_authenticated %}
+          <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ comment_form }}
+              <button class="btn btn-info" type="submit">Add comment <i class="fas fa-comments"></i></button>
+            </div>
+          </form>
+          {% else %}
+          <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to add a comment!</a><br>
+          {% endif %}
+
+          {% if comments %}
+          <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
+          <hr>
+          <ul>
+            {% for comment in comments %}
+            <li>
+             <div>
+                <span>
+                  <strong class="text-info">{{ comment.comment_user_id }} </strong>
+                  <small class="text-muted">{{ comment.comment_time }}</small>
+                </span>
+                <p>
+                  {{ comment.comment_content|safe }}
+                </p>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+          {% else %}
+            <strong class="text-secondary">No comments yet...</strong>
+          {% endif %}
     </div>
 {% endblock %}
