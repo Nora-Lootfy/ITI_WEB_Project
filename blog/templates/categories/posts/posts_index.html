@@ -13,6 +13,18 @@
             <a href="{% url 'delete-post' post.pk %}">Delete this post</a>
             <br><br>
         </li>
+        <li>
+            <form action = "{%url 'like-post' post.pk%}" method = 'POST'>
+                {% csrf_token %}
+                <button value = {{post.pk}} , name = "post_like" , class ="btn btn-primary btn-sm">Like {{post.total_likes}}</button>
+                <br>
+            </form>
+            <form action = "{%url 'dislike-post' post.pk%}" method = 'POST'>
+                {% csrf_token %}
+                <button value = {{post.pk}} , name = "post_dislike" , class ="btn btn-primary btn-sm">disLike {{post.total_dis_likes}}</button>
+                <br>
+            </form>
+        </li>
     {% endfor %}
     </ul>
     </div>
