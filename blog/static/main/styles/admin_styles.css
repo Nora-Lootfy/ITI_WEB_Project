@@ -1,0 +1,186 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap");
+
+main .container .card-list {
+    background-color: var(--box-color);
+    padding: 20px;
+    height: 50vh;
+    margin: 30px auto;
+    width: 80%;
+    position: relative;
+    box-shadow: 0 15px 25px var(--box-color);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .container .card-list .icon {
+    position: absolute;
+    top: calc(50% - 11px);
+    width: fit-content;
+}
+
+main .container .card-list .icon.left {
+    left: 0;
+}
+
+main .container .card-list .icon.right {
+    right: 0;
+}
+
+main .container .card-list .icon span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+} 
+
+main .container .card-list .icon.left span {
+    border-color: transparent transparent var(--text-color) var(--text-color);
+    cursor: pointer;
+}
+
+main .container .card-list .icon.left span:hover {
+    border-color: transparent transparent var(--main-color) var(--main-color);
+}
+
+main .container .card-list .icon.right span {
+    border-color: var(--text-color) var(--text-color) transparent transparent;
+    cursor: pointer;
+}
+
+main .container .card-list .icon.right span:hover {
+    border-color: var(--main-color) var(--main-color) transparent transparent;
+}
+
+main .container .card-list .info-wrapper .info{
+    font-family: "Montserrat";
+    color: var(--text-color);
+}
+
+main .container .card-list .info-wrapper .info h2 {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+main .container .card-list .info-wrapper .info h4 {
+    font-size: 40px;
+    position: relative;
+    left: -20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+} 
+
+main .container .card-list .info-wrapper .info h4::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left:-5px;
+    height: 100%;
+    width: 2px;
+    background-color: var(--text-color);
+}
+
+main .container .card-list .info-wrapper .info h4::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left:0;
+    width: 10%;
+    height: 2px;
+    background-color: var(--text-color);
+}
+
+main .container .card-list .info-wrapper .info {
+    display: none;
+}
+
+main .container .card-list .info-wrapper .info.current {
+    display: block;
+}
+
+section {
+    display: none;
+}
+
+section.current {
+    display: block;
+}
+
+section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+section .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+section .card-display  {
+    text-align: center;
+    background-color: var(--box-color);
+    padding: 20px;
+    color: var(--text-color);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    overflow: hidden;
+}
+
+section .card-display h2 {
+    margin-bottom: 20px;
+}
+
+section .card-display p {
+    margin-bottom: 20px;
+}
+
+section .card-display.current-user {
+    box-shadow: 0 5px 25px #fff, 0 5px 25px rgb(9, 8, 8);
+} 
+
+section .card-display button {
+    padding: 5px;
+    background-color: transparent;
+    outline: transparent;
+    border: transparent;
+    color: var(--main-color);
+}
+
+section .card-display img {
+    width: 280px;
+    height: 200px;
+}
+
+section .container.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section .container.btn button {
+    padding: 10px;
+    background-color: transparent;
+    outline: transparent;
+    border: transparent;
+    color: var(--main-color);
+    border-bottom: 2px solid var(--main-color) ;
+}
+
+section button a {
+    text-decoration: none;
+    color: inherit;
+}

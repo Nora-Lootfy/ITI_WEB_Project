@@ -5,6 +5,7 @@
     {% if form.is_bound %}
         {% if field.errors %}
             {{ field }}
+            {{ field.label_tag }}
             {% for error in field.errors %}
                 <div class="error-message">
                     {{ error }}
@@ -12,11 +13,12 @@
             {% endfor %}
         {% else %}
             {{ field }}
+            {{ field.label_tag }}
         {% endif %}
     {% else %}
         {{ field }}
+        {{ field.label_tag }}
     {% endif %}
     
-    {{ field.label_tag }}
 </div>
 {% endfor %}
