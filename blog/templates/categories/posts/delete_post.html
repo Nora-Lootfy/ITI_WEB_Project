@@ -1,0 +1,36 @@
+{% extends 'global/base.html' %}
+{% load static %}
+
+{% block title %}Create New Post{% endblock %}
+
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'categories/styles/post_styles.css' %}">
+{% endblock %}
+
+{% block continuetoblog %} 
+<p>continue to blog</p>
+{% endblock %}
+
+{% block main %} 
+    <main>
+        <div class="container">
+            <h2>Are you sure that you want to delete this post ? <i class="fa-solid"></i></h2>
+            <div class="post-box">
+                <form method="post" novalidate enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Delete
+                    </button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'categories/scripts/post_style.js' %}"></script>
+{% endblock %}
+

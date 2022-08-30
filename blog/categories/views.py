@@ -65,3 +65,8 @@ class PostUpdate(UpdateView):
         if obj.post_user_id != self.request.user:
             raise Http404("You are not allowed to edit this Post")
         return super(PostUpdate, self).dispatch(request, *args, **kwargs)
+
+class PostDelete(DeleteView):
+    model = Post
+    template_name = 'categories/posts/delete_post.html'
+    success_url = reverse_lazy('posts-index')

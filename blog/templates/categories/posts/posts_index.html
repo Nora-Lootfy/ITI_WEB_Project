@@ -4,7 +4,9 @@
     <ul>
     {% for post in object_list %}
         <li><a href="{% url 'post-details' post.pk %}">{{ post.post_title }}</a>
-        {{ post.post_user_id}} - <a href="{% url 'edit-post' post.pk %}">Edit this post</a> <br><br>
+        {{ post.post_user_id}} - <a href="{% url 'edit-post' post.pk %}">Edit this post</a>
+            <a href="{% url 'delete-post' post.pk %}">Delete this post</a>
+            <br><br>
         </li>
         <li>
             <form action = "{%url 'like-post' post.pk%}" method = 'POST'>
