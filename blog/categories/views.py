@@ -1,12 +1,12 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy, reverse
 # from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Post, Category
 from .forms import PostForm, CategoryForm
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 
 
 # Create your views here.
@@ -14,9 +14,23 @@ from django.http import Http404
 
 # def posts_info(request):
 #     return render(request, 'posts/posts_index.html')
+# like and dislike views
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_like'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse_lazy("posts-index"))
+
+
+def DisLikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_dislike'))
+    post.dislikes.add(request.user)
+    return HttpResponseRedirect(reverse_lazy("posts-index"))
+
+
 class PostList(ListView):
     model = Post
     template_name = 'categories/posts/posts_index.html'
+
 
 class PostDetail(DetailView):
     model = Post
@@ -33,7 +47,6 @@ class PostCreate(CreateView):
     def form_valid(self, form):
         form.instance.post_user_id = self.request.user
         return super().form_valid(form)
-    
 
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -41,11 +54,12 @@ class PostUpdate(UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'categories/posts/create_post.html'
-    
+
     def get_success_url(self):
         post_id = self.object.id
-        return reverse_lazy('post-details', kwargs={'pk': post_id}) # requires modifications
-    
+        # requires modifications
+        return reverse_lazy('post-details', kwargs={'pk': post_id})
+
     def dispatch(self, request, *args, **kwargs):
         obj = self.get_object()
         if obj.post_user_id != self.request.user:
