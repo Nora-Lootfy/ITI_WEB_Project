@@ -15,16 +15,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='post_like',
-            field=models.ManyToManyField(related_name='post_likes', to=settings.AUTH_USER_MODEL),
+            field=models.ManyToManyField(
+                related_name='post_likes', to=settings.AUTH_USER_MODEL),
         ),
         migrations.AlterField(
             model_name='category',
             name='category_user',
-            field=models.ManyToManyField(related_name='cat_user', to=settings.AUTH_USER_MODEL, verbose_name='user'),
+            field=models.ManyToManyField(
+                related_name='cat_user', to=settings.AUTH_USER_MODEL, verbose_name='user'),
         ),
-        migrations.AlterField(
-            model_name='post',
-            name='post_tags',
-            field=models.ManyToManyField(blank=True, to='categories.tag', verbose_name='tags'),
-        ),
+
     ]

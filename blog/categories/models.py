@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.shortcuts import reverse
+
 # Create your models here.
 
 
@@ -11,6 +12,8 @@ class Category(models.Model):
         max_length=100, verbose_name='description')
     category_user = models.ManyToManyField(
         User, null=True, related_name='cat_user', verbose_name='user')
+    subscribe = models.ManyToManyField(
+        User, related_name='subscribe', blank=True)
 
     def __str__(self):
         return self.category_name
@@ -21,6 +24,9 @@ class Category(models.Model):
     @classmethod
     def get_all_categories(cls):
         return Category.objects.all()
+
+    def totalsubscribs(self):
+        return self.subscribe.count()
 
 
 class Tag(models.Model):
@@ -73,7 +79,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     comment_content = models.TextField(max_length=200)
-    comment_post_id = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    comment_post_id = models.ForeignKey(
+        Post, related_name='comments', on_delete=models.CASCADE)
     comment_user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     comment_time = models.DateTimeField(auto_now_add=True)
 

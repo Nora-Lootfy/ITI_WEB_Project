@@ -45,101 +45,29 @@
                 <span></span>
             </div>
             <div class="categories">
-                <div>
-                    <i class="fa-solid fa-baseball"></i>
-                    <p>Sports</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-heart"></i>
-                    <p>Health</p>
-                    <span></span>
-                </div>
+                {%for cat in categories%}
                 <div>
                     <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
+                    <p>{{cat.category_name}}</p>
+
                     <span></span>
+                    {%if user in cat.subscribe.all%}
+                        <form action = "{%url 'unsubscribe-category' cat.pk%}" method = 'POST'>
+                            {% csrf_token %}
+                            <button value = {{cat.pk}} , name = "unsubscribe" , class ="btn btn-primary btn-sm">UnSubscribe</button>
+                            <br>
+                        </form>
+                    {%else%}
+                    <form action = "{%url 'subscribe-category' cat.pk%}" method = 'POST'>
+                        {% csrf_token %}
+                        <button value = {{cat.pk}} , name = "subscribe" , class ="btn btn-primary btn-sm">Subscribe {{cat.totalsubscribs}}</button>
+                        <br>
+                    </form>
+                    {%endif%}
                 </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
-                <div>
-                    <i class="fa-solid fa-newspaper"></i>
-                    <p>News</p>
-                    <span></span>
-                </div>
+                {%endfor%}
+                
+    
             </div>
         </div>
     </aside>

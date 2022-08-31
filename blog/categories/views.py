@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 # from django.http import HttpResponse
@@ -15,15 +16,27 @@ from django.http import Http404, HttpResponseRedirect
 # def posts_info(request):
 #     return render(request, 'posts/posts_index.html')
 # like and dislike views
-def LikeView(request, pk):
+def likeview(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_like'))
     post.likes.add(request.user)
     return HttpResponseRedirect(reverse_lazy("posts-index"))
 
 
-def DisLikeView(request, pk):
+def unlikeview(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('unpost_like'))
+    post.likes.remove(request.user)
+    return HttpResponseRedirect(reverse_lazy("posts-index"))
+
+
+def dislikeview(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_dislike'))
     post.dislikes.add(request.user)
+    return HttpResponseRedirect(reverse_lazy("posts-index"))
+
+
+def undislikeview(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('undspost_like'))
+    post.dislikes.remove(request.user)
     return HttpResponseRedirect(reverse_lazy("posts-index"))
 
 
@@ -96,5 +109,22 @@ class PostDelete(DeleteView):
             raise Http404("You are not allowed to delete this Post")
         return super(PostDelete, self).dispatch(request, *args, **kwargs)
 
-# class CommentCreate(CreateView)
-#     pass
+
+def get_categories(request):
+    my_data = Category.objects.all()
+    context = {
+        'categories': my_data
+    }
+    return render(request, 'main/index.html', context)
+
+
+def subscribe(request, pk):
+    category = get_object_or_404(Category, id=request.POST.get('subscribe'))
+    category.subscribe.add(request.user)
+    return HttpResponseRedirect(reverse_lazy("get-catiegores"))
+
+
+def ussubscribe(request, pk):
+    category = get_object_or_404(Category, id=request.POST.get('unsubscribe'))
+    category.subscribe.remove(request.user)
+    return HttpResponseRedirect(reverse_lazy("get-catiegores"))

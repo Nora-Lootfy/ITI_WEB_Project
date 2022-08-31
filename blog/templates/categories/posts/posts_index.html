@@ -14,16 +14,35 @@
             <br><br>
         </li>
         <li>
+            {% comment %} those were the states of likes and dislikes {% endcomment %}
+
+            {%if user in post.likes.all%}
+            <form action = "{%url 'unlike-post' post.pk%}" method = 'POST'>
+                {% csrf_token %}
+                <button value = {{post.pk}} , name = "unpost_like" , class ="btn btn-primary btn-sm">unLike {{post.total_likes}}</button>
+                <br>
+            </form>
+            {%elif user not in post.dislikes.all%}
             <form action = "{%url 'like-post' post.pk%}" method = 'POST'>
                 {% csrf_token %}
                 <button value = {{post.pk}} , name = "post_like" , class ="btn btn-primary btn-sm">Like {{post.total_likes}}</button>
                 <br>
             </form>
-            <form action = "{%url 'dislike-post' post.pk%}" method = 'POST'>
+            {%endif%}
+            {%if user in post.dislikes.all%}
+            <form action = "{%url 'undislike-post' post.pk%}" method = 'POST'>
                 {% csrf_token %}
-                <button value = {{post.pk}} , name = "post_dislike" , class ="btn btn-primary btn-sm">disLike {{post.total_dis_likes}}</button>
+                <button value = {{post.pk}} , name = "undspost_like" , class ="btn btn-primary btn-sm">undislike {{post.total_dis_likes}}</button>
                 <br>
             </form>
+            {%elif user not in post.likes.all%}
+            <form action = "{%url 'dislike-post' post.pk%}" method = 'POST'>
+                {% csrf_token %}
+                <button value = {{post.pk}} , name = "post_dislike" , class ="btn btn-primary btn-sm">dislike {{post.total_dis_likes}}</button>
+                <br>
+            </form>
+            {%endif%}
+            
         </li>
     {% endfor %}
     </ul>
