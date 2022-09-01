@@ -72,7 +72,7 @@
                 <h2>{{post.post_title}}</h2>
                 {% if post.post_user_id == user %}
                 <button><a href="{{post.get_post_url}}">edit</a></button>
-                <button><a href="">delete</a></button>
+                <button><a href="{{post.get_delete_post_url}}">delete</a></button>
                 {% endif %}
             </div>
         {% endfor %}

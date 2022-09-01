@@ -67,8 +67,16 @@ class Post(models.Model):
     @property
     def number_of_comments(self):
         return Comment.objects.filter(comment_post_id=self).count()
+    
+    def get_delete_post_url(self):
+        return reverse("delete-post", args=[self.id])
 
-
+    @classmethod
+    def get_all_posts_url(cls):
+        return reverse("home")
+    
+    def get_post_details_url(self):
+        return reverse("post-details", args=[self.id])
 class Comment(models.Model):
     comment_content = models.TextField(max_length=200)
     comment_post_id = models.ForeignKey(

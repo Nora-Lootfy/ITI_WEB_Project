@@ -1,50 +1,64 @@
 {% extends 'global/base.html' %}
+{% load static %}
+
+{% block styles %} 
+<link rel="stylesheet" href="{% static 'categories/styles/post_details.css' %}">
+{% endblock %}
 
 {% block main %}
-    <div class="container">
-        <h1>{{ post.post_title }}</h1>
-        <p>BY: {{ post.post_user_id }} - {{ post.post_created_at }}</p>
-        <br><hr>
-        <br><br>
-        <img src="{{ post.get_image_url }}" alt="..."
-             width="200" height="200"><br><br>
-        <p>{{ post.post_content }}</p>
-        <a href="{% url 'posts-index' %}">Back</a>
-        <br><br>
-        <h2>Comments...</h2>
-        <br>
-        {% if user.is_authenticated %}
-          <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-              {{ comment_form }}
-              <button class="btn btn-info" type="submit">Add comment <i class="fas fa-comments"></i></button>
+<main>
+  <div class="container">
+    <h2>"{{ post.post_title }}"</h2>
+    <p>BY: {{ post.post_user_id }} - {{ post.post_created_at }}</p>
+    <br><hr>
+    <br><br>
+    <img src="{{ post.get_image_url }}" alt="..."><br><br>
+    <p class="post-content">{{ post.post_content }}</p>
+    <a href="{% url 'home' %}">Back to home</a>
+    <br><br><hr>
+    <h3>Comments...</h2>
+    <br>
+    <div class="post-box">
+      {% if user.is_authenticated %}
+      <form method="post" novalidate class="comment-form">
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="user-box">
+              {{field}}
             </div>
-          </form>
-          {% else %}
-          <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to add a comment!</a><br>
-          {% endif %}
-
-          {% if comments %}
-          <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
-          <hr>
-          <ul>
-            {% for comment in comments %}
-            <li>
-             <div>
-                <span>
-                  <strong class="text-info">{{ comment.comment_user_id }} </strong>
-                  <small class="text-muted">{{ comment.comment_time }}</small>
-                </span>
-                <p>
-                  {{ comment.comment_content|safe }}
-                </p>
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
-          {% else %}
-            <strong class="text-secondary">No comments yet...</strong>
-          {% endif %}
+          {% endfor %}
+          <button type="submit">
+              Add comment <i class="fas fa-comments"></i>
+          </button>
+      </form>
+      {% else %}
+      <a href="{% url 'login' %}?next={{request.path}}">Log in to add a comment!</a><br>
+      {% endif %}
     </div>
+
+      <div class="comments-section">
+        {% if comments %}
+        <strong class="number">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong>
+        <hr>
+        <ul>
+          {% for comment in comments %}
+          <li>
+          <div>
+              <span>
+                <strong>{{ comment.comment_user_id }} </strong>
+                <small>{{ comment.comment_time }}</small>
+              </span>
+              <p>
+                {{ comment.comment_content|safe }}
+              </p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <strong>No comments yet...</strong>
+        {% endif %}
+      </div>
+</div>
+</main>
 {% endblock %}

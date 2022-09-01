@@ -76,7 +76,7 @@ footer .content :not(:last-child){
     margin-bottom: 20px;
 }
 
-footer .content div {
+footer .content div.flex {
     margin-top: 20px;
     width: fit-content;
     display: flex;
@@ -118,3 +118,5 @@ nav .active {
 header .content h2{
     font-size: 40px;
 }
+
+

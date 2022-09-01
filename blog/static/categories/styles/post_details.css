@@ -1,0 +1,129 @@
+main .container {
+    margin: 40px auto;
+    background: var(--box-color);
+    padding: 30px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+main .container h2 {
+    color: var(--main-color);
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+main .container p {
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+main .container img {
+    width: calc(100% - 60px);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+}
+
+main .container .post-content {
+    font-size: 20px;
+}
+
+main .container .post-content::before,
+main .container .post-content::after {
+    content: " \" ";
+    color: var(--main-color);
+}
+
+main .container a {
+    display: block;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--main-color);
+    border-bottom: 1px solid var(--main-color);
+}
+
+main .container h3 {
+    color: var(--text-color);
+    margin-top: 20px;
+}
+
+.comment-form {
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.user-box {
+    width: 70%;
+    height: 100%;
+}
+
+.user-box textarea {
+    background: none;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-bottom: 1px solid var(--main-color);
+    border-top: 1px solid var(--main-color);
+    color: var(--text-color);
+    font-size: 20px;
+    padding: 10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--main-color);
+    background: none;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+
+
+.comment-form textarea {
+    width: 100%;
+    height: 100%;
+    text-indent: 50px;
+}
+
+.comments-section {
+    color: var(--text-color)
+}
+
+.number {
+    margin-bottom: 20px;
+    font-size: 20px;
+    display: block;
+}
+
+.comments-section hr {
+    margin-bottom: 20px;
+}
+
+.comments-section li {
+    margin: 20px;
+    padding: 10px;
+    display: block;
+    border-bottom: 1px solid var(--text-color);
+}

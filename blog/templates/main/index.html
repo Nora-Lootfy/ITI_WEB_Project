@@ -47,20 +47,18 @@
             <div class="categories">
                 {%for cat in categories%}
                 <div>
-                    <i class="fa-solid fa-newspaper"></i>
                     <p>{{cat.category_name}}</p>
-
                     <span></span>
                     {%if user in cat.subscribe.all%}
                         <form action = "{%url 'unsubscribe-category' cat.pk%}" method = 'POST'>
                             {% csrf_token %}
-                            <button value = {{cat.pk}} , name = "unsubscribe" , class ="btn btn-primary btn-sm">UnSubscribe</button>
+                            <button value = {{cat.pk}}  name = "unsubscribe">UnSubscribe</button>
                             <br>
                         </form>
                     {%else%}
                     <form action = "{%url 'subscribe-category' cat.pk%}" method = 'POST'>
                         {% csrf_token %}
-                        <button value = {{cat.pk}} , name = "subscribe" , class ="btn btn-primary btn-sm">Subscribe {{cat.totalsubscribs}}</button>
+                        <button value = {{cat.pk}} name = "subscribe">Subscribe {{cat.totalsubscribs}}</button>
                         <br>
                     </form>
                     {%endif%}
@@ -73,17 +71,49 @@
     </aside>
     <section class="main">
         <h3>Top posts</h3>
+        {{post}}
         <div class="body-main">
             <div class="box">
-                <span style="--i:1"><img src="p1.jpg" /></span>
-                <span style="--i:2"><img src="p2.jpg" /></span>
-                <span style="--i:3"><img src="p3.jpg" /></span>
-                <span style="--i:4"><img src="p4.jpg" /></span>
-                <span style="--i:5"><img src="p5.jpg" /></span>
+            {% for object in object_list %}
+                <span style="--i: {{object.id}}">
+                    <a href="{{object.get_post_details_url}}">
+                        <picture>
+                            <img src="{{object.get_image_url}}" />
+                            <p>{{object.post_title}}</p>
+                        </picture>
+                    </a>
+                </span>
+            {% endfor %}
             </div>
         </div>
     </section>
 </main>
+{% endblock %}
+
+{% block foot %}
+<div class="pagination">
+    
+    <div class="icon left" {% if page_obj.has_previous %}active{% endif %}>
+        <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}">
+            <span></span>
+        </a>
+    </div>
+    <div class="pages">
+    {% for i in page_obj.paginator %}
+        <div class="box {% if page_obj.number == forloop.counter %} current {% endif %}">
+            <a href="?page={{ forloop.counter }}">
+            {{ forloop.counter }}
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="icon right" {% if page_obj.has_next %}active{% endif %}>
+        <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% endif %}">
+            <span></span>
+        </a>
+    </div>
+    
+</div>
 {% endblock %}
 
 {% block script %}
