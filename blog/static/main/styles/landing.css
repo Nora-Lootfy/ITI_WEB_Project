@@ -157,7 +157,7 @@ main .main .body-main .box span {
     -moz-transform: rotateY(calc(var(--i) * 72deg)) translateZ(400px);
     -ms-transform: rotateY(calc(var(--i) * 72deg)) translateZ(400px);
     -o-transform: rotateY(calc(var(--i) * 72deg)) translateZ(400px);
-    -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #004);
+    /* -webkit-box-reflect: below 0px linear-gradient(transparent, transparent, #004); */
 }
 
 main .main .body-main .box span picture {
@@ -183,6 +183,12 @@ main .main .body-main .box span p {
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     color: var(--text-color);
+}
+
+main .main .body-main .box span p.date {
+    top: 170%;
+    left: 50%;
+    position: absolute;
 }
 
 .pagination {

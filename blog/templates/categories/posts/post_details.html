@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="{% static 'categories/styles/post_details.css' %}">
 {% endblock %}
 
+{% block continuetoblog %} 
+<p><a href="{% url 'home' %}" style="text-decoration: none; color:var(--text-color)">continue to blog</a></p>
+{% endblock %}
+
 {% block main %}
 <main>
   <div class="container">

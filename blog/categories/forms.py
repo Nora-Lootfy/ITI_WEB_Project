@@ -1,5 +1,7 @@
+from dataclasses import fields
+from pyexpat import model
 from django import forms
-from .models import Post, Category, Comment
+from .models import Post, Category, Comment, ForbiddenWord
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -17,3 +19,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('comment_content',)
+
+class ForbiddenWordForm(forms.ModelForm):
+    class Meta:
+        model = ForbiddenWord
+        fields = ("forbidden_word", )

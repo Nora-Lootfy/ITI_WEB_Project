@@ -10,8 +10,7 @@ class Category(models.Model):
     category_name = models.CharField(max_length=20, verbose_name='name')
     category_description = models.CharField(
         max_length=100, verbose_name='description')
-    category_user = models.ManyToManyField(
-        User, null=True, related_name='cat_user', verbose_name='user')
+    category_user = models.ForeignKey(User, null=True, related_name='cat_user', verbose_name='user', on_delete=models.CASCADE)
     subscribe = models.ManyToManyField(
         User, related_name='subscribe', blank=True)
 
@@ -27,7 +26,13 @@ class Category(models.Model):
 
     def totalsubscribs(self):
         return self.subscribe.count()
-
+    
+    def get_update_url(self):
+        return reverse("update-category", args=[self.id])
+    
+    def get_delete_url(self):
+        return reverse("delete-category", args=[self.id])
+    
 class Post(models.Model):
     post_title = models.CharField(
         max_length=20, null=False, verbose_name='title')
@@ -77,6 +82,10 @@ class Post(models.Model):
     
     def get_post_details_url(self):
         return reverse("post-details", args=[self.id])
+    
+    @classmethod
+    def get_posts_sorted(cls):
+        return cls.objects.all().order_by("post_created_at")[::-1]
 class Comment(models.Model):
     comment_content = models.TextField(max_length=200)
     comment_post_id = models.ForeignKey(
@@ -93,7 +102,16 @@ class Comment(models.Model):
 
 class ForbiddenWord(models.Model):
     forbidden_word = models.CharField(max_length=200)
-
+    forbidden_user = models.ForeignKey(User, null=True, related_name='for_user', verbose_name='user', on_delete=models.CASCADE)
     @classmethod
     def get_all_forbidden_words(cls):
         return cls.objects.all()
+
+    def __str__(self):
+        return self.forbidden_word
+    
+    def get_update_url(self):
+        return reverse("update-forbidden-word", args=[self.id])
+    
+    def get_delete_url(self):
+        return reverse("delete-forbidden-word", args=[self.id])

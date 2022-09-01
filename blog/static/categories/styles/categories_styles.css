@@ -18,9 +18,9 @@ main .container .post-box {
 }
 
 main .container .post-box form {
-    height: 70vh;
+    height: 30vh;
     display: grid;
-    grid-template-rows: 1.5fr 6.5fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
 }
 
@@ -50,7 +50,7 @@ main .container .post-box form .user-box select {
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     width: calc(100% - 20px);
-    text-indent: 120px;
+    text-indent: 220px;
     color: var(--text-color);
     border-bottom: 2px solid var(--main-color);
 }
@@ -62,10 +62,6 @@ main .container .post-box form .user-box label {
     font-size: 25px;
 }
 
-main .container .post-box form .user-box textarea + label {
-    top: 7px;
-}
-
 main .container .post-box form .user-box input + label {
     top: 50%;
     transform: translateY(-50%);
@@ -75,10 +71,6 @@ main .container .post-box form .user-box input + label {
     -o-transform: translateY(-50%);
 } 
 
-main .container .post-box form .user-box textarea {
-    text-indent: 200px;
-    line-height: 1.7;
-}
 
 main .container .post-box form .user-box a {
     position: absolute;
@@ -103,9 +95,6 @@ main .container .post-box form button, main .container .post-box form a {
     text-align: center;
 }
 
-main .container .post-box form.delete button {
-    color: #9a1948;
-}
 
 main .container .post-box form button:hover, main .container .post-box form a:hover{
     background: var(--main-color);
@@ -209,9 +198,3 @@ main .container .post-box form.delete button span:nth-child(3) {
 }
 
 
-form.delete {
-    display: flex !important;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}

@@ -1,9 +1,9 @@
 from django.urls import path
 
-from categories.views import PostList
+from categories.views import home
 from . import views
 
 urlpatterns = [
-    path('', PostList.as_view(), name='home'),
+    path('', home, name='home'),
     path("admin_panel/<int:id>", views.admin_panel, name="admin_panel"),
 ]

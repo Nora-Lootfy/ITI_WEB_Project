@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block continuetoblog %} 
-<p>continue to blog</p>
+<p><a href="{% url 'home' %}" style="text-decoration: none; color:var(--text-color)">continue to blog</a></p>
 {% endblock %}
 
 {% block linkes %} 
@@ -88,22 +88,28 @@
                 <h2>{{category.category_name}}</h2>
                 <p>{{category.category_description}}</p>
                 {% if category.category_user == user %}
-                <button><a href="">edit</a></button>
-                <button><a href="">delete</a></button>
+                <button><a href="{{category.get_update_url}}">edit</a></button>
+                <button><a href="{{category.get_delete_url}}">delete</a></button>
                 {% endif %}
             </div>
         {% endfor %}
     </div>
     <div class="container btn">
-        <button><a href="">Create new Category</a></button>
+        <button><a href="{% url 'create-category' %}">Create new Category</a></button>
     </div>
 </section>
 <section class="forbidden-words">
     <div class="container">
-        
+        {% for word in forbidden_words %}
+            <div class="card-display">
+                <h2>{{word.forbidden_word}}</h2>
+                <button><a href="{{word.get_update_url}}">edit</a></button>
+                <button><a href="{{word.get_delete_url}}">delete</a></button>
+            </div>
+        {% endfor %}
     </div>
     <div class="container btn">
-        <button><a href="">Add new forbidden word</a></button>
+        <button><a href="{% url 'create-forbidden-word' %}">Add new forbidden word</a></button>
     </div>
 </section>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostList, PostDetail, PostCreate, PostUpdate, likeview, dislikeview, PostDelete, subscribe, undislikeview, unlikeview, ussubscribe
+from .views import PostDetail, PostCreate, PostUpdate, likeview, dislikeview, PostDelete, subscribe, undislikeview, unlikeview, ussubscribe, CategoryCreate, ForbiddenWordCreate, ForbiddenWordUpdate, CategoryDelete, ForbiddenWordDelete, CategoryUpdate
 
 urlpatterns = [
     path('posts/<int:pk>', PostDetail.as_view(), name='post-details'),
@@ -11,5 +11,11 @@ urlpatterns = [
     path('undislike/<int:pk>', undislikeview, name='undislike-post'),
     path('deletepost/<int:pk>', PostDelete.as_view(), name='delete-post'),
     path('subscribe/<int:pk>', subscribe, name="subscribe-category"),
-    path('unsbscribe/<int:pk>', ussubscribe, name='unsubscribe-category')
+    path('unsbscribe/<int:pk>', ussubscribe, name='unsubscribe-category'),
+    path('create_category/', CategoryCreate.as_view(), name="create-category"),
+    path('create_forbidden_word/', ForbiddenWordCreate.as_view(), name="create-forbidden-word"),
+    path('update_category/<int:pk>', CategoryUpdate.as_view(), name="update-category"),
+    path('update_forbidden_word/<int:pk>', ForbiddenWordUpdate.as_view(), name="update-forbidden-word"),
+    path('delete_category/<int:pk>', CategoryDelete.as_view(), name="delete-category"),
+    path('delete_forbidden_word/<int:pk>', ForbiddenWordDelete.as_view(), name="delete-forbidden-word"),
 ]

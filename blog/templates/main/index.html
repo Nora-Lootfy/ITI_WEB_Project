@@ -18,7 +18,6 @@
             {{user.username}}
         </div>
         <ul>
-            <li><a href="#profile">Profile</a></li>
             {% if user.is_staff  %}
             <li><a href="{% url 'admin_panel' user.id %}">Manage blog</a></li>
             {% endif %}
@@ -74,12 +73,13 @@
         {{post}}
         <div class="body-main">
             <div class="box">
-            {% for object in object_list %}
-                <span style="--i: {{object.id}}">
+            {% for object in page_obj %}
+                <span style="--i:{{forloop.counter}}">
                     <a href="{{object.get_post_details_url}}">
                         <picture>
                             <img src="{{object.get_image_url}}" />
                             <p>{{object.post_title}}</p>
+                            <p class="date">{{object.post_created_at}}</p>
                         </picture>
                     </a>
                 </span>
@@ -91,6 +91,7 @@
 {% endblock %}
 
 {% block foot %}
+
 <div class="pagination">
     
     <div class="icon left" {% if page_obj.has_previous %}active{% endif %}>
