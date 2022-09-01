@@ -28,14 +28,6 @@ class Category(models.Model):
     def totalsubscribs(self):
         return self.subscribe.count()
 
-
-class Tag(models.Model):
-    tag_name = models.CharField(max_length=20, null=False, unique=True)
-
-    def __str__(self):
-        return self.tag_name
-
-
 class Post(models.Model):
     post_title = models.CharField(
         max_length=20, null=False, verbose_name='title')

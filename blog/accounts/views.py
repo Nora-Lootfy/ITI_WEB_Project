@@ -3,9 +3,6 @@ from . import forms
 from django.contrib.auth import login as auth_login
 
 # Create your views here.
-def home(request):
-    return render(request, 'accounts/index.html')
-
 def register(request):
     form = forms.Register()
     

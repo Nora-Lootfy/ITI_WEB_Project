@@ -62,8 +62,8 @@ class PostDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         new_comment = Comment(comment_content=request.POST.get('comment_content'),
-                              comment_user_id=self.request.user,
-                              comment_post_id=self.get_object())
+                                comment_user_id=self.request.user,
+                                comment_post_id=self.get_object())
         new_comment.save()
         return self.get(self, request, *args, **kwargs)
 
