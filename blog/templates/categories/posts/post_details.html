@@ -64,5 +64,13 @@
         {% endif %}
       </div>
 </div>
+<div class="hidden" style="display: none;">
+{% for word in forbidden_words %}
+<div class="word">{{word}}</div>
+{% endfor %}
+</div>
 </main>
+{% endblock %}
+{% block script %}
+<script src="{% static 'categories/scripts/forbidden_words.js' %}"></script>
 {% endblock %}

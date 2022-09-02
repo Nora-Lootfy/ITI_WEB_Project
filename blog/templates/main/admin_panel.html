@@ -58,7 +58,11 @@
             {% if not usr.is_staff %}
                 <button>lock</button>
                 <button>unlock</button>
-                <button>make admin</button>
+                <form method="post" action="{% url 'make_admin' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="usr" value="{{usr.id}}">
+                    <button type="submit">make admin</button>
+                </form>
             {% endif %}
         </div>
     {% endfor %}

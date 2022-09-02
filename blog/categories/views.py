@@ -56,6 +56,7 @@ class PostDetail(DetailView):
         comments_connected = Comment.objects.filter(
             comment_post_id=self.get_object()).order_by('-comment_time')
         data['comments'] = comments_connected
+        data['forbidden_words'] = ForbiddenWord.objects.all()
         if self.request.user.is_authenticated:
             data['form'] = CommentForm(instance=self.request.user)
 
