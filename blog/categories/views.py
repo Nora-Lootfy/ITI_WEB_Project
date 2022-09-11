@@ -11,33 +11,34 @@ from django.utils.decorators import method_decorator
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator
 
+
 def likeview(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_like'))
     post.likes.add(request.user)
-    return HttpResponseRedirect(reverse_lazy("posts-index"))
+    return HttpResponseRedirect(reverse('post-details', args=[str(pk)]))
 
 
 def unlikeview(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('unpost_like'))
     post.likes.remove(request.user)
-    return HttpResponseRedirect(reverse_lazy("posts-index"))
+    return HttpResponseRedirect(reverse('post-details', args=[str(pk)]))
 
 
 def dislikeview(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_dislike'))
     post.dislikes.add(request.user)
-    return HttpResponseRedirect(reverse_lazy("posts-index"))
+    return HttpResponseRedirect(reverse('post-details', args=[str(pk)]))
 
 
 def undislikeview(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('undspost_like'))
     post.dislikes.remove(request.user)
-    return HttpResponseRedirect(reverse_lazy("posts-index"))
+    return HttpResponseRedirect(reverse('post-details', args=[str(pk)]))
 
 
 def home(request):
     object_list = Post.get_posts_sorted()
-    paginator = Paginator(object_list, 5) # Show 25 contacts per page.
+    paginator = Paginator(object_list, 5)  # Show 25 contacts per page.
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -45,6 +46,7 @@ def home(request):
         'categories': Category.get_all_categories(),
         'page_obj': page_obj,
     })
+
 
 class PostDetail(DetailView):
     model = Post
@@ -64,8 +66,8 @@ class PostDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         new_comment = Comment(comment_content=request.POST.get('comment_content'),
-                                comment_user_id=self.request.user,
-                                comment_post_id=self.get_object())
+                              comment_user_id=self.request.user,
+                              comment_post_id=self.get_object())
         new_comment.save()
         return self.get(self, request, *args, **kwargs)
 
@@ -75,6 +77,7 @@ class PostCreate(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'categories/posts/create_post.html'
+
     def get_success_url(self):
         user_id = self.object.post_user_id.id
         # requires modifications
@@ -84,11 +87,13 @@ class PostCreate(CreateView):
         form.instance.post_user_id = self.request.user
         return super().form_valid(form)
 
-@method_decorator(staff_member_required, name='dispatch') 
+
+@method_decorator(staff_member_required, name='dispatch')
 class CategoryCreate(CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'categories/categories/create_category.html'
+
     def get_success_url(self):
         user_id = self.object.category_user.id
         # requires modifications
@@ -97,19 +102,23 @@ class CategoryCreate(CreateView):
     def form_valid(self, form):
         form.instance.category_user = self.request.user
         return super().form_valid(form)
-        
-@method_decorator(staff_member_required, name='dispatch') 
+
+
+@method_decorator(staff_member_required, name='dispatch')
 class ForbiddenWordCreate(CreateView):
     model = ForbiddenWord
     form_class = ForbiddenWordForm
     template_name = 'categories/categories/create_category.html'
+
     def get_success_url(self):
         user_id = self.object.forbidden_user.id
         # requires modifications
         return reverse_lazy('admin_panel', kwargs={'id': user_id})
+
     def form_valid(self, form):
         form.instance.forbidden_user = self.request.user
         return super().form_valid(form)
+
 
 @method_decorator(staff_member_required, name='dispatch')
 class PostUpdate(UpdateView):
@@ -128,12 +137,13 @@ class PostUpdate(UpdateView):
             raise Http404("You are not allowed to edit this Post")
         return super(PostUpdate, self).dispatch(request, *args, **kwargs)
 
-@method_decorator(staff_member_required, name='dispatch') 
+
+@method_decorator(staff_member_required, name='dispatch')
 class CategoryUpdate(UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'categories/categories/create_category.html'
-    
+
     def get_success_url(self):
         user_id = self.object.category_user.id
         # requires modifications
@@ -145,22 +155,24 @@ class CategoryUpdate(UpdateView):
             raise Http404("You are not allowed to edit this category")
         return super(CategoryUpdate, self).dispatch(request, *args, **kwargs)
 
-@method_decorator(staff_member_required, name='dispatch') 
+
+@method_decorator(staff_member_required, name='dispatch')
 class ForbiddenWordUpdate(UpdateView):
     model = ForbiddenWord
     form_class = ForbiddenWordForm
     template_name = 'categories/categories/create_category.html'
-    
+
     def get_success_url(self):
         user_id = self.object.forbidden_user.id
         # requires modifications
         return reverse_lazy('admin_panel', kwargs={'id': user_id})
 
+
 @method_decorator(staff_member_required, name='dispatch')
 class PostDelete(DeleteView):
     model = Post
     template_name = 'categories/posts/delete_post.html'
-    
+
     def get_success_url(self):
         user_id = self.object.post_user_id.id
         # requires modifications
@@ -172,11 +184,12 @@ class PostDelete(DeleteView):
             raise Http404("You are not allowed to edit this Post")
         return super(PostDelete, self).dispatch(request, *args, **kwargs)
 
+
 @method_decorator(staff_member_required, name='dispatch')
 class CategoryDelete(DeleteView):
     model = Category
     template_name = 'categories/posts/delete_post.html'
-    
+
     def get_success_url(self):
         user_id = self.object.category_user.id
         # requires modifications
@@ -188,11 +201,12 @@ class CategoryDelete(DeleteView):
             raise Http404("You are not allowed to edit this category")
         return super(CategoryDelete, self).dispatch(request, *args, **kwargs)
 
+
 @method_decorator(staff_member_required, name='dispatch')
 class ForbiddenWordDelete(DeleteView):
     model = ForbiddenWord
     template_name = 'categories/posts/delete_post.html'
-    
+
     def get_success_url(self):
         user_id = self.object.forbidden_user.id
         # requires modifications

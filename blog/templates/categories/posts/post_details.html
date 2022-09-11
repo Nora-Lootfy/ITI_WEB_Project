@@ -35,6 +35,32 @@
               Add comment <i class="fas fa-comments"></i>
           </button>
       </form>
+      {%if user in post.likes.all%}
+      <form action = "{%url 'unlike-post' post.pk%}" method = 'POST'>
+        {% csrf_token %}
+        <button value = {{post.pk}} name = "unpost_like">unlike</button>
+        <br>
+    </form> 
+      {%elif user not in post.dislikes.all and user not in post.likes.all%}
+      <form action = "{%url 'like-post' post.pk%}" method = 'POST'>
+        {% csrf_token %}
+        <button value = {{post.pk}} name = "post_like">like {{post.total_likes}}</button>
+        <br>
+    </form>
+    {%endif%}
+    {%if user in post.dislikes.all %}
+      <form action = "{%url 'undislike-post' post.pk%}" method = 'POST'>
+        {% csrf_token %}
+        <button value = {{post.pk}} name = "undspost_like">un dislike</button>
+        <br>
+    </form>
+    {%elif user not in post.dislikes.all and  user not in post.likes.all%}
+      <form action = "{%url 'dislike-post' post.pk%}" method = 'POST'>
+        {% csrf_token %}
+        <button value = {{post.pk}} name = "post_dislike">dislike {{post.total_dis_likes}}</button>
+        <br>
+    </form>
+    {%endif%}
       {% else %}
       <a href="{% url 'login' %}?next={{request.path}}">Log in to add a comment!</a><br>
       {% endif %}
